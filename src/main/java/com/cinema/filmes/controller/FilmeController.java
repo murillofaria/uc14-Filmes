@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class FilmeController {
 
-    private List<Filme> filmes = new ArrayList<>();
+    public List<Filme> filmes = new ArrayList<>();
 
     @GetMapping("/cadastro")
     public String exibirCadastro(Model model) {
@@ -23,9 +23,9 @@ public class FilmeController {
     }
 
     @PostMapping("/cadastro")
-    public String cadastrarFilme(@ModelAttribute Filme filme, Model model) {
-        filme.setId(filmes.size() + 1);
-        filmes.add(filme);
+    public String cadastrarFilme(@ModelAttribute Filme filmePopulado, Model model) {
+        filmePopulado.setId(filmes.size() + 1);
+        filmes.add(filmePopulado);
         return "redirect:/lista";
     }
 

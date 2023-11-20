@@ -1,5 +1,6 @@
 package com.cinema.filmes.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,13 +16,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table(name = "filme")
 public class Filme {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Integer id;
 
     private String titulo;
     private String sinopse;
     private String genero;
-    private int anoLancamento;
+    private int ano_lancamento;
 }

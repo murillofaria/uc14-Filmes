@@ -20,12 +20,12 @@ public class Analise {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "id_filme")
     private Filme filme;
     
     private String analise;
-    private int nota;
+    private double nota;
 }
