@@ -8,27 +8,39 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class FilmeService {
-    
+
     @Autowired
     FilmeRepository filmeRepository;
-    
-    public Filme criarFilme(Filme filme){
+
+    public Filme criarFilme(Filme filme) {
         filme.setId(null);
         filmeRepository.save(filme);
         return filme;
     }
-    
-    public List<Filme> listarFilmes(){
+
+    public Filme mudarFilme(Integer filmeId, Filme filmeEnviado) {
+        Filme filmeEncontrado = getFilmeId(filmeId);
+        
+        filmeEncontrado.setTitulo(filmeEnviado.getTitulo());
+        filmeEncontrado.setSinopse(filmeEnviado.getSinopse());
+        filmeEncontrado.setGenero(filmeEnviado.getGenero());
+        filmeEncontrado.setAno_lancamento(filmeEnviado.getAno_lancamento());
+        
+        filmeRepository.save(filmeEncontrado);
+        return filmeEncontrado;
+    }
+
+    public Filme getFilmeId(Integer filmeId) {
+        return filmeRepository.findById(filmeId).orElseThrow();
+    }
+
+    public List<Filme> listarFilmes() {
         return filmeRepository.findAll();
     }
-    
-    public Filme exibirFilmePorId(Integer id){
-        return filmeRepository.findById(id).orElseThrow();
-    }
-    
-    public void excluirFilme(Integer id){
-        Filme filmeExcluido = exibirFilmePorId(id);
+
+    public void excluirFilme(Integer filmeId) {
+        Filme filmeExcluido = getFilmeId(filmeId);
         filmeRepository.deleteById(filmeExcluido.getId());
     }
-    
+
 }

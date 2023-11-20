@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,15 +28,21 @@ public class FilmeAPIController {
         return new ResponseEntity<>(filmeCadastrado, HttpStatus.CREATED);
     }
 
+    @PutMapping("/atualizar/filme/{filmeId}")
+    public ResponseEntity<Filme> atualizarFilme(@PathVariable Integer filmeId, @RequestBody Filme filme) {
+        Filme filmeAtualizado = filmeService.mudarFilme(filmeId, filme);
+        return new ResponseEntity<>(filmeAtualizado, HttpStatus.OK);
+    }
+
     @GetMapping("/exibir/filme")
     public ResponseEntity<List> exibirFilmes() {
         List<Filme> filmes = filmeService.listarFilmes();
         return new ResponseEntity<>(filmes, HttpStatus.OK);
     }
-    
-    @DeleteMapping("/deletar/filme/{id}")
-    public ResponseEntity<?> deletarFilme(@PathVariable Integer id){
-        filmeService.excluirFilme(id);
+
+    @DeleteMapping("/deletar/filme/{filmeId}")
+    public ResponseEntity<?> deletarFilme(@PathVariable Integer filmeId) {
+        filmeService.excluirFilme(filmeId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

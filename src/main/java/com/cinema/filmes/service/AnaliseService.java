@@ -11,24 +11,35 @@ public class AnaliseService {
 
     @Autowired
     AnaliseRepository analiseRepository;
-    
-    public Analise criarAnalise(Analise analise){
+
+    public Analise criarAnalise(Analise analise) {
         analise.setId(null);
         analiseRepository.save(analise);
         return analise;
     }
-    
-    public List<Analise> listarAnalises(){
+
+    public Analise mudarAnalise(Integer analiseId, Analise analiseEnviada) {
+        Analise analiseEncontrada = getAnaliseId(analiseId);
+        
+        analiseEncontrada.setFilme(analiseEnviada.getFilme());
+        analiseEncontrada.setAnalise(analiseEnviada.getAnalise());
+        analiseEncontrada.setNota(analiseEnviada.getNota());
+        
+        analiseRepository.save(analiseEncontrada);
+        return analiseEncontrada;
+    }
+
+    public Analise getAnaliseId(Integer analiseId) {
+        return analiseRepository.findById(analiseId).orElseThrow();
+    }
+
+    public List<Analise> listarAnalises() {
         return analiseRepository.findAll();
     }
-    
-    public Analise exibirAnalisePorId(Integer id){
-        return analiseRepository.findById(id).orElseThrow();
-    }
-    
-    public void excluirAnalise(Integer id){
-        Analise analiseExcluida = exibirAnalisePorId(id);
+
+    public void excluirAnalise(Integer analiseId) {
+        Analise analiseExcluida = getAnaliseId(analiseId);
         analiseRepository.deleteById(analiseExcluida.getId());
     }
-    
+
 }
