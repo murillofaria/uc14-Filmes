@@ -21,10 +21,9 @@ public class AnaliseService {
     public Analise mudarAnalise(Integer analiseId, Analise analiseEnviada) {
         Analise analiseEncontrada = getAnaliseId(analiseId);
         
-        analiseEncontrada.setFilme(analiseEnviada.getFilme());
-        analiseEncontrada.setAnalise(analiseEnviada.getAnalise());
+        analiseEncontrada.setAnalise_feita(analiseEnviada.getAnalise_feita());
         analiseEncontrada.setNota(analiseEnviada.getNota());
-        
+
         analiseRepository.save(analiseEncontrada);
         return analiseEncontrada;
     }

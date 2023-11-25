@@ -25,7 +25,7 @@ public class Analise {
     @ManyToOne
     @JoinColumn(name = "id_filme")
     private Filme filme;
-    
-    private String analise;
-    private double nota;
+
+    private String analise_feita;
+    private int nota;
 }

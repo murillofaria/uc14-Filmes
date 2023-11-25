@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/cinema")
+@RequestMapping("/api")
 public class AnaliseAPIController {
 
     @Autowired
@@ -29,11 +29,11 @@ public class AnaliseAPIController {
     }
 
     @PutMapping("/atualizar/analise/{analiseId}")
-    public ResponseEntity<Analise> atualizarAnalise(@PathVariable Integer analiseId, @RequestBody Analise analise){
+    public ResponseEntity<Analise> atualizarAnalise(@PathVariable Integer analiseId, @RequestBody Analise analise) {
         Analise analiseAtualizada = analiseService.mudarAnalise(analiseId, analise);
         return new ResponseEntity<>(analiseAtualizada, HttpStatus.OK);
     }
-    
+
     @GetMapping("/exibir/analise")
     public ResponseEntity<List> exibirAnalises() {
         List<Analise> analises = analiseService.listarAnalises();
